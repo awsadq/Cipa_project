@@ -70,5 +70,6 @@ Route::post('/subscribe', function (Request $request) {
 Route::get('/restricted-section', function () {
     return 'Только для членов';
 })->middleware('auth:sanctum', 'check.access:resources');
+Route::post('/me/upload-avatar', [ProfileController::class, 'uploadAvatar'])->middleware('auth:sanctum');
 
 

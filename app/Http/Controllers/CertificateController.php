@@ -1,15 +1,23 @@
+<?php
+
+namespace App\Http\Controllers;
+
 use App\Models\Certificate;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-public function store(Request $request)
+class CertificateController extends Controller
 {
-$data = $request->validate([
-'certificate_number' => 'required|string|unique:certificates',
-'type' => 'required|string',
-'issued_at' => 'required|date',
-]);
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'certificate_number' => 'required|string|unique:certificates',
+            'type' => 'required|string',
+            'issued_at' => 'required|date',
+        ]);
 
-$certificate = Auth::user()->certificates()->create($data);
+        $certificate = Auth::user()->certificates()->create($data);
 
-return response()->json($certificate);
+        return response()->json($certificate);
+    }
 }
