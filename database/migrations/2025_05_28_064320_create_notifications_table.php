@@ -15,6 +15,9 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->string('type'); // email / whatsapp
+            $table->text('content');
+            $table->string('status')->default('queued'); // queued, sent, failed
             $table->timestamps();
         });
     }

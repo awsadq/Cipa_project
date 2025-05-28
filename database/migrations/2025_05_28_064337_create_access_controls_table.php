@@ -15,8 +15,12 @@ class CreateAccessControlsTable extends Migration
     {
         Schema::create('access_controls', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('section'); // например: resources
+            $table->boolean('access_granted')->default(false);
             $table->timestamps();
         });
+
     }
 
     /**

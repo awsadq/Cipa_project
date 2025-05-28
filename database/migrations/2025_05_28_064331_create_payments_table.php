@@ -15,6 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 10, 2);
+            $table->string('status')->default('pending'); // pending, paid, failed
+            $table->string('method')->nullable(); // карта, MBank и т.д.
             $table->timestamps();
         });
     }

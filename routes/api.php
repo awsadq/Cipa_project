@@ -50,3 +50,25 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/courses/{id}/apply', [ApplicationController::class, 'apply']);
 });
 
+use App\Http\Controllers\AdminController;
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+    Route::post('/send-mail', [AdminController::class, 'sendMail']);
+    Route::post('/send-whatsapp', [AdminController::class, 'sendWhatsApp']);
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+});
+
+use App\Models\Subscriber;
+
+
+Route::post('/subscribe', function (Request $request) {
+    $request->validate(['email' => 'required|email|unique:subscribers,email']);
+    Subscriber::create(['email' => $request->email]);
+    return response()->json(['message' => 'Подписка оформлена']);
+});
+
+Route::get('/restricted-section', function () {
+    return 'Только для членов';
+})->middleware('auth:sanctum', 'check.access:resources');
+
+
