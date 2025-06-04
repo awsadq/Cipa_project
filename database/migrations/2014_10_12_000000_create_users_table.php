@@ -21,8 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('role')->default('user'); // admin, user
+            $table->string('role')->default('user'); // Admin, user
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_certified')->default(false);
 
         });
     }

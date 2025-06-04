@@ -37,8 +37,8 @@ Route::post('/me/avatar', [ProfileController::class, 'uploadAvatar'])->middlewar
 | - Заявки на членство
 |
 */
-Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
-    // admin routes
+Route::middleware(['auth:sanctum', 'role:Admin'])->group(function () {
+    // Admin routes
 });
 Route::middleware('auth:sanctum')->post('/certificates', [CertificateController::class, 'store']);
 
@@ -93,7 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 use App\Http\Controllers\AdminController;
 
-Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+Route::middleware('auth:sanctum')->prefix('Admin')->group(function () {
     Route::post('/send-mail', [AdminController::class, 'sendMail']);
     Route::post('/send-whatsapp', [AdminController::class, 'sendWhatsApp']);
     Route::get('/dashboard', [AdminController::class, 'dashboard']);

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
-    // POST /admin/send-mail
+    // POST /Admin/send-mail
     public function sendMail(Request $request)
     {
         $data = $request->validate([
@@ -30,7 +30,7 @@ class AdminController extends Controller
         return response()->json(['message' => 'Email-рассылка добавлена в очередь']);
     }
 
-    // POST /admin/send-whatsapp
+    // POST /Admin/send-whatsapp
     public function sendWhatsApp(Request $request)
     {
         $data = $request->validate([
@@ -60,7 +60,7 @@ class AdminController extends Controller
         }
     }
 
-    // GET /admin/dashboard
+    // GET /Admin/dashboard
     public function dashboard()
     {
         return response()->json([

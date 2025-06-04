@@ -34,3 +34,4 @@ class CreateTrainersTable extends Migration
         Schema::dropIfExists('trainers');
     }
 }
+

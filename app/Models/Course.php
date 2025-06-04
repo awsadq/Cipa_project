@@ -21,4 +21,18 @@ class Course extends Model
 
     protected $guarded = []; // или перечисли нужные поля через $fillable
 
+    protected $fillable = [
+        'title',
+        'description',
+        'program',
+        'program_file',
+        'start_date',
+        'end_date',
+        'course_category_id',
+        'trainer_id',
+        'whatsapp_link',
+    ];
+
+
+
 }
