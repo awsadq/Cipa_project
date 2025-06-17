@@ -5,6 +5,7 @@
         .courses-section {
             position: relative;
             z-index: 1;
+            margin-top: 30px;
         }
 
         /* Section Header */
@@ -428,11 +429,12 @@
             @endforelse
         </div>
 
-        {{-- Full Schedule Link --}}
+        {{-- All Courses Link --}}
         <div class="text-end mt-5">
-            <a href="{{ route('courses.full_schedule') }}" class="schedule-link">
-                📅 Полное расписание курсов
+            <a href="{{ route('courses.allcourses') }}" class="schedule-link">
+                📚 Все курсы
             </a>
         </div>
+
     </div>
 </div>

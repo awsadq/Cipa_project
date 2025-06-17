@@ -11,12 +11,21 @@
             </div>
         @endif
 
-        <h2>Добавить курс</h2>
-        <form method="POST" action="{{ route('admin.courses.store') }}" enctype="multipart/form-data">
-            @csrf
-            @include('admin.courses.form')
-            <button type="submit" class="btn btn-success">💾 Сохранить</button>
-        </form>
+        <div class="form-container">
+            <div class="form-header">
+                <h2 class="form-title">Добавить курс</h2>
+                <p class="form-subtitle">Заполните все обязательные поля</p>
+            </div>
+
+            <div class="form-body">
+                <form method="POST" action="{{ route('admin.courses.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    @include('admin.courses.form')
+                    <button type="submit" class="btn btn-success w-100 mt-4">💾 Сохранить</button>
+                </form>
+            </div>
+        </div>
+
 
     </div>
 @endsection

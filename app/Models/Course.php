@@ -32,7 +32,4 @@ class Course extends Model
         'trainer_id',
         'whatsapp_link',
     ];
-
-
-
 }

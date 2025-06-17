@@ -49,68 +49,330 @@
             line-height: 1.6;
         }
 
+        /* Beautiful Corporate Header Design */
         .top-bar {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
-            color: var(--white);
-            font-size: 0.875rem;
-            box-shadow: 0 2px 4px var(--shadow);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #1e293b 0%, #1e40af 35%, #3b82f6 65%, #1e293b 100%);
+
+            box-shadow: 0 8px 32px rgba(30, 64, 175, 0.12);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .top-bar a {
-            color: var(--white);
-            text-decoration: none;
+        .top-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Animated Logo Border */
+        .animate-border-logo {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-border-logo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(45deg, #ffffff, #60a5fa, #ef4444, #ffffff);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+            animation: rotate-border 3s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animate-border-logo:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(30, 64, 175, 0.25);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .animate-border-logo img {
+            position: relative;
+            z-index: 2;
+            filter: brightness(1.1) contrast(1.05);
             transition: all 0.3s ease;
-            padding: 2px 6px;
-            border-radius: 4px;
         }
 
-        .top-bar a:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+        /* Language Switcher */
+        .top-bar a[href*="lang"] {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .top-bar a[href*="lang"]:hover {
+            color: #dbeafe !important;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-bar a[href*="lang"]:active {
+            transform: translateY(0);
+        }
+
+        /* Personal Account Button */
+        .btn-outline-light {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            letter-spacing: 0.3px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline-light:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline-light:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline-light:active {
             transform: translateY(-1px);
         }
 
-        .top-bar span {
-            margin-right: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .top-bar .btn-outline-light {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: var(--white);
-            font-weight: 500;
-            padding: 6px 16px;
-            transition: all 0.3s ease;
+        /* Search Form */
+        .top-bar form.d-flex {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 2px;
             backdrop-filter: blur(10px);
-        }
-
-        .top-bar .btn-outline-light:hover {
-            background-color: var(--white);
-            color: var(--primary-blue);
-            border-color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .top-bar .form-control {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
-        .top-bar .form-control:focus {
-            border-color: var(--white);
-            background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+        .top-bar form.d-flex:focus-within {
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(30, 64, 175, 0.2);
+            transform: scale(1.02);
         }
 
-        .top-bar .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        .form-control-sm {
+            background: transparent;
+            border: none;
+            padding: 10px 16px;
+            font-size: 0.875rem;
+            color: #374151;
+            border-radius: 25px;
+            width: 200px;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: none;
         }
+
+        .form-control-sm::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .form-control-sm:focus {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            width: 220px;
+            color: #1f2937;
+        }
+
+        .form-control-sm:focus::placeholder {
+            opacity: 0.6;
+        }
+
+        /* Search Submit Button (Hidden but functional) */
+        .top-bar form.d-flex::after {
+            content: '🔍';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 0.875rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .top-bar form.d-flex:focus-within::after {
+            color: #1e40af;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .top-bar .d-flex.justify-content-between {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .top-bar .ms-4 {
+                margin-left: 0 !important;
+                align-self: flex-start;
+            }
+
+            .top-bar .d-flex.align-items-center.gap-3 {
+                gap: 0.75rem !important;
+                justify-content: center;
+            }
+
+            .form-control-sm {
+                width: 160px;
+            }
+
+            .form-control-sm:focus {
+                width: 180px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .top-bar .d-flex.align-items-center.gap-3 {
+                flex-direction: column;
+                gap: 0.5rem !important;
+                width: 100%;
+            }
+
+            .btn-outline-light {
+                width: 100%;
+                max-width: 200px;
+                text-align: center;
+            }
+
+            .top-bar form.d-flex {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .form-control-sm {
+                width: 100%;
+            }
+
+            .form-control-sm:focus {
+                width: 100%;
+            }
+
+            .top-bar {
+                padding: 1rem 0.75rem;
+            }
+        }
+
+        /* Enhanced Hover Effects */
+        .top-bar .d-flex.align-items-center > div:first-child {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .top-bar .d-flex.align-items-center > div:first-child:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Accessibility Improvements */
+        .top-bar a:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        .btn-outline-light:focus {
+            outline: none;
+        }
+
+        /* Performance Optimizations */
+        .top-bar * {
+            will-change: transform;
+        }
+
+        .animate-border-logo::before {
+            will-change: transform;
+        }
+
+        /* Additional Corporate Styling */
+        .top-bar {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        /* Subtle Gradient Text Effect */
+        .top-bar a[href*="lang"] {
+            background: linear-gradient(135deg, #ffffff, #dbeafe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .top-bar a[href*="lang"]:hover {
+            background: linear-gradient(135deg, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+
+
+
+
 
         /* Main Navigation Styling */
         .navbar {
@@ -909,156 +1171,186 @@
 
 
     </style>
+
+    @stack('styles')
 </head>
 <body>
 
+
 <div class="top-bar py-2 px-3 d-flex justify-content-between align-items-center">
+    <!-- Логотип -->
     <div class="ms-4 animate-border-logo p-1 rounded">
         <img src="{{ asset('images/home_logo.png') }}" alt="Логотип" height="30">
     </div>
-    <div class="d-flex align-items-center">
-        <a href="#" class="btn btn-sm btn-outline-light">Личный кабинет</a>
-        <form class="d-inline ms-3" action="{{ route('search') }}" method="GET">
-            <input type="text" name="q" class="form-control form-control-sm d-inline w-auto" placeholder="Поиск..." required>
+
+    <div class="d-flex align-items-center gap-3 mt-2 mt-md-0 flex-wrap">
+
+        <div>
+            <a href="{{ url('lang/kg') }}" class="text-white me-2">@lang('menu.language_kg')</a> /
+            <a href="{{ url('lang/ru') }}" class="text-white">@lang('menu.language_ru')</a>
+        </div>
+
+        <a href="#" class="btn btn-sm btn-outline-light">@lang('menu.login')</a>
+
+        <!-- Поиск -->
+        <form action="{{ route('search') }}" method="GET" class="d-flex">
+            <input type="text" name="q" class="form-control form-control-sm" placeholder="@lang('menu.search_placeholder')" required>
         </form>
     </div>
 </div>
 
 
-
 <!-- Main Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ИПБА КР</a>
+        <a class="navbar-brand" href="#">@lang('menu.ipba_kr')</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <!-- О НАС -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">О нас</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.about_us')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Об институте</a></li>
-                        <li><a class="dropdown-item" href="#">Новости</a></li>
-                        <li><a class="dropdown-item" href="#">Общее собрание членов</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.institute')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.news')</a></li>
+
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#">Органы управления</a>
+                            <a class="dropdown-item dropdown-toggle" href="#">@lang('menu.governance_bodies')</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Совет аудиторов</a></li>
+                                <li><a class="dropdown-item" href="#">@lang('menu.general_meeting')</a></li>
+                                <li><a class="dropdown-item" href="#">@lang('menu.audit_council')</a></li>
+
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Комитеты</a>
+                                    <a class="dropdown-item dropdown-toggle" href="#">@lang('menu.committees')</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Комитет по администрированию</a></li>
-                                        <li><a class="dropdown-item" href="#">Комитет по обучению</a></li>
+                                        <li><a class="dropdown-item" href="#">@lang('menu.admin_committee')</a></li>
+                                        <li><a class="dropdown-item" href="#">@lang('menu.training_committee')</a></li>
+                                        <li><a class="dropdown-item" href="#">@lang('menu.quality_committee')</a></li>
+                                        <li><a class="dropdown-item" href="#">@lang('menu.investigation_committee')</a></li>
+                                        <li><a class="dropdown-item" href="#">@lang('menu.disciplinary_committee')</a></li>
+                                        <li><a class="dropdown-item" href="#">@lang('menu.audit_committee')</a></li>
                                     </ul>
                                 </li>
+
+                                <li><a class="dropdown-item" href="#">@lang('menu.executive_body')</a></li>
+                                <li><a class="dropdown-item" href="#">@lang('menu.control_body')</a></li>
                             </ul>
                         </li>
-                        <li><a class="dropdown-item" href="#">Международная деятельность</a></li>
-                        <li><a class="dropdown-item" href="#">Документы</a></li>
-                        <li><a class="dropdown-item" href="#">Партнеры</a></li>
-                        <li><a class="dropdown-item" href="#">Отчетность</a></li>
-                        <li><a class="dropdown-item" href="#">Контакты</a></li>
+
+                        <li><a class="dropdown-item" href="#">@lang('menu.international')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.documents')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.partners')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.reporting')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.contacts')</a></li>
                     </ul>
                 </li>
 
+
                 <!-- Реестры -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Реестры</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.registers')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Аудиторские организации</a></li>
-                        <li><a class="dropdown-item" href="#">Аудиторы</a></li>
-                        <li><a class="dropdown-item" href="#">Сведения о повышении квалификации аудиторами</a></li>
-                        <li><a class="dropdown-item" href="#">Аудиторы, прекратившие членство</a></li>
-                        <li><a class="dropdown-item" href="#">Аудиторские организации, прекратившие членство</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.audit_orgs')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.auditors')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.qualification_info')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.membership_ended')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.orgs_ended')</a></li>
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#">Реестр дисциплинарных мер</a>
+                            <a class="dropdown-item dropdown-toggle" href="#">@lang('menu.discipline_registry')</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">К аудиторам</a></li>
-                                <li><a class="dropdown-item" href="#">К аудиторам и организациям</a></li>
+                                <li><a class="dropdown-item" href="#">@lang('menu.to_auditors')</a></li>
+                                <li><a class="dropdown-item" href="#">@lang('menu.to_auditors_and_orgs')</a></li>
                             </ul>
                         </li>
-                        <li><a class="dropdown-item" href="#">Сертифицированные бухгалтера практики (CIPA)</a></li>
-                        <li><a class="dropdown-item" href="#">Сертифицированные международные проф. бухгалтера (CIPA)</a></li>
-                        <li><a class="dropdown-item" href="#">CPA Eurasia</a></li>
-                        <li><a class="dropdown-item" href="#">Профессиональная квалификация аудиторов</a></li>
-                        <li><a class="dropdown-item" href="#">Бухгалтер банковского учёта — Уровень 1</a></li>
-                        <li><a class="dropdown-item" href="#">Бухгалтер банковского учёта — Уровень 2</a></li>
-                        <li><a class="dropdown-item" href="#">Поиск членов</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.certified_cipa')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.certified_intl_cipa')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.cpa_eurasia')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.auditor_qualification')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.bank_accounting_1')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.bank_accounting_2')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.member_search')</a></li>
                     </ul>
                 </li>
 
                 <!-- Членство -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Членство</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.membership')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Вступить</a></li>
-                        <li><a class="dropdown-item" href="#">Свидетельство</a></li>
-                        <li><a class="dropdown-item" href="#">Взносы</a></li>
-                        <li><a class="dropdown-item" href="#">Отчетность членов</a></li>
-                        <li><a class="dropdown-item" href="#">Изменения в реестр</a></li>
-                        <li><a class="dropdown-item" href="#">Прекращение членства</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.join')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.certificate')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.fees')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.member_reports')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.registry_changes')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.terminate')</a></li>
                     </ul>
                 </li>
 
                 <!-- Сертификации -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Сертификации</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.certifications')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Профессиональная квалификация аудитора</a></li>
-                        <li><a class="dropdown-item" href="#">Двухуровневая программа CIPA</a></li>
-                        <li><a class="dropdown-item" href="#">Трехуровневая программа CPA Eurasia</a></li>
-                        <li><a class="dropdown-item" href="#">Бухгалтер банковского учёта 1 и 2</a></li>
-                        <li><a class="dropdown-item" href="#">Конвертация сертификатов</a></li>
-                        <li><a class="dropdown-item" href="#">Поиск сертификата</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.auditor_prof_qual')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.cipa_program')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.cpa_program')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.bank_course_1_2')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.cert_conversion')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.cert_search')</a></li>
                     </ul>
                 </li>
 
                 <!-- Учебный центр -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Учебный центр</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.training_center')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Главная страница учебного центра</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы для начинающих</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы по программе CIPA (1 и 2 уровень)</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы по программе Профессиональной квалификации аудиторов</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы ББУ 1 и 2</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы MS EXCEL</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы для руководителей</a></li>
-                        <li><a class="dropdown-item" href="#">Курсы для кадровиков</a></li>
-                        <li><a class="dropdown-item" href="#">Семинары / тренинги</a></li>
-                        <li><a class="dropdown-item" href="#">Онлайн обучение</a></li>
-                        <li><a class="dropdown-item" href="#">Записи курсов и семинаров</a></li>
-                        <li><a class="dropdown-item" href="#">Тренеры и эксперты</a></li>
-                        <li><a class="dropdown-item" href="#">Консультации</a></li>
-                        <li><a class="dropdown-item" href="#">Способы оплаты</a></li>
-                        <li><a class="dropdown-item" href="#">Скачать договор</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.main_page')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.beginner_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.cipa_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.auditor_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.bank_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.advanced_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.excel_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.leader_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.hr_courses')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.seminars')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.online_training')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.course_records')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.trainers')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.consulting')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.payment_methods')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.download_contract')</a></li>
                     </ul>
                 </li>
 
                 <!-- Ресурсы -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Ресурсы</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.resources')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Актуальное</a></li>
-                        <li><a class="dropdown-item" href="#">Полезные ссылки</a></li>
-                        <li><a class="dropdown-item" href="#">Нормативные документы</a></li>
-                        <li><a class="dropdown-item" href="#">МСА / МСФО</a></li>
-                        <li><a class="dropdown-item" href="#">Методические материалы</a></li>
-                        <li><a class="dropdown-item" href="#">Шаблоны и формы</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.actual')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.useful_links')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.regulations')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.isa')</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">@lang('menu.ifrs')</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">@lang('menu.methods')</a></li>
+                                <li><a class="dropdown-item" href="#">@lang('menu.templates')</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
 
                 <!-- Работодателям -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Работодателям</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">@lang('menu.employers')</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Разместить вакансию</a></li>
-                        <li><a class="dropdown-item" href="#">Найти специалиста</a></li>
-                        <li><a class="dropdown-item" href="#">Условия размещения</a></li>
-                        <li><a class="dropdown-item" href="#">Аттестация сотрудников</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.post_job')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.find_specialist')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.placement_terms')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('menu.attestation')</a></li>
                     </ul>
                 </li>
 
@@ -1066,6 +1358,7 @@
         </div>
     </div>
 </nav>
+
 
 <main class="py-4">
     @yield('content')
@@ -1108,14 +1401,32 @@
 
             {{-- Подписка --}}
             <div class="col-lg-4 mb-4">
-                <h5 class="footer-title">Подписка на новости</h5>
+                <h5 class="footer-title">Последние новости</h5>
                 <p>Получайте актуальную информацию о событиях и новостях института</p>
-                <form class="input-group mb-3" method="POST" action="#">
-                    <input type="email" class="form-control form-control-lg" placeholder="Введите ваш Email" required>
-                    <button class="btn btn-danger px-4" type="submit">
-                        <i class="fas fa-paper-plane me-2"></i>Подписаться
-                    </button>
+                <form class="input-group mb-3" method="POST" action="{{ route('subscribe') }}">
+                    @csrf
+                    <div class="input-group footer-subscribe-group">
+                        <input type="email" name="email" class="form-control" placeholder="Введите ваш Email" required>
+                        <button class="btn btn-danger" type="submit">
+                            <i class="fas fa-paper-plane me-2"></i> Узнать новость
+                        </button>
+                    </div>
                 </form>
+
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    </div>
+                @endif
+
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>

@@ -29,6 +29,9 @@
         position: relative;
         background: var(--white);
         margin-top: -30px;
+        min-height: 400px !important;
+        height: auto !important;
+
     }
 
     /* Carousel Inner */
@@ -36,12 +39,17 @@
         border-radius: 0;
         overflow: hidden;
         position: relative;
+        min-height: 400px !important;
+        height: 100% !important;
     }
 
     /* Carousel Item Styling */
     .carousel-item {
         position: relative;
         transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        min-height: 400px !important;
+        height: 100% !important;
+
     }
 
     .carousel-item.active {
@@ -84,7 +92,7 @@
     /* Corporate Base Styling */
     .carousel-item .bg-corporate {
         position: relative;
-        min-height: 550px;
+        height: 600px !important;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -306,7 +314,7 @@
 
         .carousel-item .bg-corporate {
             padding: 50px 30px !important;
-            min-height: 280px;
+            min-height: 300px;
         }
 
         .carousel-control-prev,
@@ -451,11 +459,39 @@
             height: 24px;
             background-size: 24px 24px;
         }
+
+        .bg-corporate {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            padding: 60px 20px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .greeting-text h2.text-gradient {
+            background: linear-gradient(90deg, #ffffff, #dbeafe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .greeting-text p {
+            color: #f3f4f6;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
     }
 </style>
 
 </head>
 <body>
+
 
 @php
     use App\Models\News;
@@ -476,17 +512,36 @@
 @endphp
 
 <div class="carousel-wrapper">
-    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-inner">
-            @foreach($slides as $index => $slide)
-                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                    <div class="bg-corporate text-white text-center p-5 fs-4">
-                        <a href="{{ $slide[1] }}" class="text-white text-decoration-none d-block w-100">
-                            {{ $slide[0] }}
-                        </a>
-                    </div>
-                </div>
 
+            {{-- Первый слайд с приветствием + ссылкой --}}
+            <div class="carousel-item active">
+                <div class="bg-corporate text-white text-center p-5">
+                    <div class="greeting-text mb-4">
+                        <h2 class="fw-bold display-6 text-gradient">Добро пожаловать в Учебный центр ИПБА КР!</h2>
+                        <p class="lead mt-3 mb-0">
+                            Мы предлагаем программы профессиональной подготовки, курсы повышения квалификации,<br>
+                            семинары и тренинги по самым актуальным вопросам бухгалтерии, аудита и налогообложения.
+                        </p>
+                    </div>
+                    <a href="{{ $slides[0][1] }}" class="text-white text-decoration-none d-block fs-4 mt-4">
+                        {{ $slides[0][0] }}
+                    </a>
+                </div>
+            </div>
+
+            {{-- Остальные слайды --}}
+            @foreach($slides as $index => $slide)
+                @if ($index !== 0)
+                    <div class="carousel-item">
+                        <div class="bg-corporate text-white text-center p-5 fs-4">
+                            <a href="{{ $slide[1] }}" class="text-white text-decoration-none d-block w-100">
+                                {{ $slide[0] }}
+                            </a>
+                        </div>
+                    </div>
+                @endif
             @endforeach
         </div>
 

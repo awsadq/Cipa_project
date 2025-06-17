@@ -13,10 +13,8 @@ class CourseController extends Controller
     {
         $categories = CourseCategory::all();
         $query = Course::with(['trainer', 'category']);
-
         $selectedCategory = null;
 
-        // 🔍 Фильтрация по категории
         if ($request->has('category')) {
             $selectedCategory = $request->category;
             $query->whereHas('category', function ($q) use ($request) {
@@ -24,22 +22,20 @@ class CourseController extends Controller
             });
         }
 
-        // 🔍 Фильтрация по тренеру
         if ($request->has('trainer')) {
             $query->whereHas('trainer', function ($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->trainer . '%');
             });
         }
 
-        // 🔍 Фильтрация по дате (если явно указано)
         if ($request->has('from') && $request->has('to')) {
             $query->whereBetween('start_date', [$request->from, $request->to]);
         }
 
-        // ❌ Удалили ограничение по дате окончания!
-        // Все курсы будут отображаться, независимо от времени начала/окончания
+        $courses = $query->orderBy('start_date', 'desc')
+            ->take(4) // 👈 Показываем только 4 курса на главной
+            ->get();
 
-        $courses = $query->orderBy('start_date', 'desc')->get();
         $news = News::latest()->take(4)->get();
 
         return view('pages.home', [
@@ -48,6 +44,45 @@ class CourseController extends Controller
             'selectedCategory' => $selectedCategory,
             'news' => $news,
         ]);
+    }
+
+    public function allCourses(Request $request)
+    {
+        $query = Course::with(['trainer', 'category']);
+
+        // Фильтрация по названию курса
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+
+        // Фильтрация по категории
+        if ($request->filled('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', $request->category);
+            });
+        }
+
+        // Фильтрация по тренеру
+        if ($request->filled('trainer')) {
+            $query->whereHas('trainer', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->trainer . '%');
+            });
+        }
+
+        // Фильтрация по дате начала
+        if ($request->filled('from')) {
+            $query->whereDate('start_date', '>=', $request->from);
+        }
+
+        // Фильтрация по дате окончания
+        if ($request->filled('to')) {
+            $query->whereDate('end_date', '<=', $request->to);
+        }
+
+        $courses = $query->orderBy('start_date', 'desc')->get();
+        $categories = CourseCategory::all();
+
+        return view('courses.allcourses', compact('courses', 'categories'));
     }
 
 

@@ -4,7 +4,7 @@
     <style>
         .course-detail-section {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: transparent;
             min-height: 100vh;
             padding: 2rem 0;
         }
@@ -166,6 +166,10 @@
             font-size: 4rem;
             color: #dee2e6;
             font-weight: bold;
+        }
+
+        .info-card.d-flex {
+            padding: 1.25rem;
         }
 
         .program-section {
@@ -433,10 +437,24 @@
                             <div class="info-value">{{ $course->category->name ?? 'Не указана' }}</div>
                         </div>
 
-                        <div class="info-card">
-                            <div class="info-label">👨‍🏫 Тренер</div>
-                            <div class="info-value">{{ $course->trainer->name ?? 'Не указан' }}</div>
+                        <div class="info-card d-flex align-items-center gap-3">
+                            @if($course->trainer && $course->trainer->photo)
+                                <img src="{{ asset('storage/' . $course->trainer->photo) }}"
+                                     alt="{{ $course->trainer->name }}"
+                                     class="rounded-circle"
+                                     style="width: 64px; height: 64px; object-fit: cover;">
+                            @endif
+                            <div>
+                                <div class="info-value mb-1">{{ $course->trainer->name ?? 'Не указан' }}</div>
+                                @if($course->trainer && $course->trainer->position)
+                                    <div class="text-muted" style="font-size: 0.9rem;">{{ $course->trainer->position }}</div>
+                                @endif
+                                @if($course->trainer && $course->trainer->bio)
+                                    <div class="text-muted" style="font-size: 0.85rem;">{{ $course->trainer->bio }}</div>
+                                @endif
+                            </div>
                         </div>
+
 
                         <div class="info-card">
                             <div class="info-label">📅 Период обучения</div>
